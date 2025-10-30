@@ -1,0 +1,12 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/symfony/Dockerfile
+    container_name: symfony-php
+    volumes:
+      - ./symfony:/var/www/html
+    working_dir: /var/www/html
+    ports:
+      - "8000:8000"
+    tty: true
