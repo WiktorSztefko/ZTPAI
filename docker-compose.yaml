@@ -10,3 +10,15 @@ services:
     ports:
       - "8000:8000"
     tty: true
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: symfony-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./symfony:/var/www/html
+    depends_on:
+      - php
