@@ -11,19 +11,18 @@ services:
       - "8000:8000"
     networks:
       - app-network
-    tty: true
 
   nginx:
     build:
       context: .
       dockerfile: docker/nginx/Dockerfile
     container_name: nginx
-    volumes:
-      - ./symfony:/var/www/html
     ports:
       - "8080:80"
     networks:
       - app-network
+    volumes:
+      - ./symfony:/var/www/html
     depends_on:
       - symfony
 
@@ -38,17 +37,28 @@ services:
     networks:
       - app-network
 
+
   postgres:
     build:
       context: .
       dockerfile: docker/postgres/Dockerfile
     container_name: postgres
-    volumes:
-      - ./postgres:/var/lib/postgresql/18/docker
     ports:
       - "5432:5432"
     networks:
       - app-network
+    volumes:
+      - ./postgres:/var/lib/postgresql/18/docker
+
+  react:
+    build:
+      context: .  
+      dockerfile: docker/react/Dockerfile
+    container_name: react
+    ports:
+    - "3000:80"
+    networks:
+    - app-network
 
 networks:
   app-network:
