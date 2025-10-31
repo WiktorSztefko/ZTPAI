@@ -15,11 +15,23 @@ Wyłączenie kontenerów:
 - docker-compose down
 
 ## Technologie
-- Symfony
-- Docker
+- Symfony backend aplikacji, obsługuje logikę biznesową, REST API oraz komunikację z bazą danych.
+- React - frontend, odpowiada za interfejs użytkownika i konsumpcję API Symfony.
+- PostgreSQL - baza danych przechowująca wszystkie dane aplikacji.
+- pgAdmin - narzędzie do zarządzania i podglądu bazy danych w PostgreSQL.
+- Docker - umożliwia uruchamianie wszystkich usług w odizolowanych kontenerach, co ułatwia konfigurację, wdrożenie i testowanie projektu
+
+Wszystkie komponenty działają w odizolowanych kontenerach Dockerowych i komunikują się w ramach wspólnej sieci (app-network).
+
+## Struktura
+- docker/ – zawiera pliki Dockerfile i konfiguracje dla poszczególnych technologii.
+- symfony/ – kod źródłowy backendu Symfony.
+- react/ – kod źródłowy frontend React.
+- docker-compose.yml – definiuje wszystkie kontenery i ich sieci, porty oraz zależności.
 
 ## Informacje dodatkowe
 Do kontenera kopiowany jest composer - [Dockerfile](/docker/backend/Dockerfile)
+
 ### W kontenerze wykonano polecenia:
 - composer create-project symfony/skeleton .
 - composer require symfony/maker-bundle --dev
