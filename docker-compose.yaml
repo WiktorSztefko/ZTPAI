@@ -1,24 +1,54 @@
 services:
-  php:
+  symfony:
     build:
       context: .
       dockerfile: docker/symfony/Dockerfile
-    container_name: symfony-php
+    container_name: symfony
     volumes:
       - ./symfony:/var/www/html
     working_dir: /var/www/html
     ports:
       - "8000:8000"
+    networks:
+      - app-network
     tty: true
 
   nginx:
     build:
       context: .
       dockerfile: docker/nginx/Dockerfile
-    container_name: symfony-nginx
-    ports:
-      - "8080:80"
+    container_name: nginx
     volumes:
       - ./symfony:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
     depends_on:
-      - php
+      - symfony
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pg-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - app-network
+
+  postgres:
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
+    container_name: postgres
+    volumes:
+      - ./postgres:/var/lib/postgresql/18/docker
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
