@@ -12,20 +12,6 @@ services:
     networks:
       - app-network
 
-  nginx:
-    build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
-    container_name: nginx
-    ports:
-      - "8080:80"
-    networks:
-      - app-network
-    volumes:
-      - ./symfony:/var/www/html
-    depends_on:
-      - symfony
-
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pg-admin
