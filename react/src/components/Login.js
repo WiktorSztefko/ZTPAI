@@ -16,25 +16,24 @@ const Login = () => {
         setError("");
 
         try {
-            const response = await fetch("http://localhost:8000/login", {
+            const response = await fetch("http://localhost:8000/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                credentials: "include", // to jest kluczowe dla sesji!
+                credentials: "include",
                 body: JSON.stringify({ email, password }),
             });
-
+    
             const data = await response.json();
 
             if (!response.ok) {
-                setError(data.message || "Błąd logowania");
+                setError(data.message);
                 return;
             }
 
             console.log("Zalogowano:", data);
         } catch (err) {
-            console.error(err);
             setError("Błąd połączenia z serwerem");
         }
     };
