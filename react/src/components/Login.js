@@ -11,9 +11,32 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // blokujemy domyślny submit
-        setError("To jest testowy błąd logowania!"); // ustawiamy błąd
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        try {
+            const response = await fetch("http://localhost:8000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include", // to jest kluczowe dla sesji!
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setError(data.message || "Błąd logowania");
+                return;
+            }
+
+            console.log("Zalogowano:", data);
+        } catch (err) {
+            console.error(err);
+            setError("Błąd połączenia z serwerem");
+        }
     };
 
     return (
