@@ -17,6 +17,7 @@ const Dashboard = () => {
 
             if (result.data) {
                 setUser(result.data);
+                console.log(result.data)
             }
         };
 
