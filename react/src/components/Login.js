@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bulma/css/bulma.min.css";
 import "../styles/Login.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
-
+import { useNavigate } from "react-router-dom";
+import { fetchUser } from "../api/fetchUser";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    const navigate = useNavigate(); 
+
+     useEffect(() => {
+            const getUser = async () => {
+                const result = await fetchUser();
+    
+                if (result.data) {
+                    navigate("/dashboard");
+                    return;
+                }
+            };
+    
+            getUser();
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,8 +46,8 @@ const Login = () => {
                 setError(data.message);
                 return;
             }
+            navigate("/dashboard");
 
-            console.log("Zalogowano:", data);
         } catch (err) {
             setError("Błąd połączenia z serwerem");
         }
@@ -41,12 +56,10 @@ const Login = () => {
     return (
         <div id="login-page" className="columns is-gapless">
 
-            {/* Lewa kolumna z obrazkiem */}
             <div id="panel-img" className="column">
                 <img src="/images/photos/login.jpeg" alt="login" className="images-fit"/>
             </div>
 
-            {/* Prawa kolumna z formularzem */}
             <div
                 id="panel-form"
                 className="column is-flex is-justify-content-center is-align-items-center black">
