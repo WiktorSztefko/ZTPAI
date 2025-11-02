@@ -1,0 +1,213 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+
+import { fetchUser } from "../api/fetchUser";
+import { validateForm } from "../utils/validateForm";
+
+import "bulma/css/bulma.min.css";
+import "../styles/Register.css";
+
+const Register = () => {
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmedPassword, setConfirmedPassword] = useState("");
+
+    const [errorName, setErrorName] = useState("");
+    const [errorSurname, setErrorSurname] = useState("");
+    const [errorUsername, setErrorUsername] = useState("");
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
+    const [errorConfirmedPassword, setErrorCorfirmedPassword] = useState("");
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const getUser = async () => {
+            const result = await fetchUser();
+
+            if (result.data) {
+                navigate("/dashboard");
+                return;
+            }
+        };
+
+        getUser();
+    }, [navigate]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const errors = validateForm({ username, password, confirmedPassword });
+
+        setErrorUsername(errors.username);
+        setErrorPassword(errors.password);
+        setErrorCorfirmedPassword(errors.confirmedPassword);
+
+        const isValid = !errors.username && !errors.password && !errors.confirmPassword;
+
+        //TODO validate from backend username or email exist
+        return isValid;
+    }
+
+    return (
+        <div id="login-page" className="columns is-gapless">
+
+            <div id="panel-img" className="column">
+                <img src="/images/photos/register.jpeg" alt="login" className="images-fit" />
+            </div>
+
+            <div
+                id="panel-form"
+                className="column is-flex is-justify-content-center is-align-items-center black">
+
+                <form onSubmit={handleSubmit} className="box black">
+                    <div className="has-text-centered mb-4">
+                        <a href="/login">
+                            <img id="logo" src="/images/photos/logo.jpeg" alt="logo" />
+                        </a>
+                        <h1 className="has-text-white">Cocktail King</h1>
+                    </div>
+
+                    <div className="">
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Imie"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </span>
+                        </div>
+                    </div>
+
+                    <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorName ? "visible" : "hidden" }}>
+                        {errorName}
+                    </p>
+
+                    <div className="">
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Nazwisko"
+                                value={surname}
+                                onChange={(e) => setSurname(e.target.value)}
+                                required
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </span>
+                        </div>
+                    </div>
+
+                    <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorSurname ? "visible" : "hidden" }}>
+                        {errorSurname}
+                    </p>
+
+                    <div className="">
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Nazwa użytkownika"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </span>
+                        </div>
+                    </div>
+
+                    <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorUsername ? "visible" : "hidden" }}>
+                        {errorUsername}
+                    </p>
+
+                    <div className="">
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="email"
+                                placeholder="Adres email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </span>
+                        </div>
+                    </div>
+
+                    <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorEmail ? "visible" : "hidden" }}>
+                        {errorEmail}
+                    </p>
+
+                    <div className="">
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="Hasło"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faLock} />
+                            </span>
+                        </div>
+                    </div>
+                  
+                    <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorPassword ? "visible" : "hidden" }}>
+                        {errorPassword}
+                    </p>
+
+                    <div className="">
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="Ponów hasło"
+                                value={confirmedPassword}
+                                onChange={(e) => setConfirmedPassword(e.target.value)}
+                                required
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faLock} />
+                            </span>
+                        </div>
+                    </div>
+
+                    <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorConfirmedPassword ? "visible" : "hidden" }}>
+                        {errorConfirmedPassword}
+                    </p>
+               
+                    <div id="button-section">
+                        <button type="submit" className="button is-warning mt-1">
+                            <FontAwesomeIcon icon={faRightToBracket} className="mr-2" />Zarejestruj się
+                        </button>
+
+                        <p className="mt-4 has-text-white">
+                            Masz już konto? <a href="/login" className="has-text-warning">zaloguj się</a>
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default Register;
