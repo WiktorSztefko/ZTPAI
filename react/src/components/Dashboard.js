@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { fetchUser } from "../api/fetchUser";
 
 const Dashboard = () => {
@@ -17,14 +18,13 @@ const Dashboard = () => {
 
             if (result.data) {
                 setUser(result.data);
-                console.log(result.data)
             }
         };
 
         getUser();
     }, [navigate]);
 
-    if (!user) return <p>Loading...</p>;
+    if (!user) return <p></p>;
 
     return (
         <div>

@@ -19,7 +19,6 @@ class UserController extends AbstractController
             return new JsonResponse(['message' => 'User not logged in'], 401);
         }
 
-        // Pobieramy użytkownika z bazy z eager loading dla details i roles
         $user = $userRepository->createQueryBuilder('u')
             ->leftJoin('u.details', 'd')
             ->addSelect('d')

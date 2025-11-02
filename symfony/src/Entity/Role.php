@@ -17,13 +17,13 @@ class Role
     #[ORM\Column(name: "name_role", type: "string", length: 255)]
     private string $name_role;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: "roles")]
-    private Collection $users;
+    //#[ORM\ManyToMany(targetEntity: User::class, mappedBy: "roles")]
+    //private Collection $users;
 
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
+    // public function __construct()
+    // {
+    //     $this->users = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -41,8 +41,8 @@ class Role
         return $this;
     }
 
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
+    // public function getUsers(): Collection
+    // {
+    //     return $this->users;
+    // }
 }

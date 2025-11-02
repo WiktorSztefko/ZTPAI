@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "bulma/css/bulma.min.css";
-import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from "react-router-dom";
+
 import { fetchUser } from "../api/fetchUser";
+
+import "bulma/css/bulma.min.css";
+import "../styles/Login.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -46,10 +49,11 @@ const Login = () => {
                 setError(data.message);
                 return;
             }
+
             navigate("/dashboard");
 
         } catch (err) {
-            setError("Błąd połączenia z serwerem");
+            setError("Connection error");
         }
     };
 
@@ -72,7 +76,7 @@ const Login = () => {
                         <h1 className="has-text-white">Cocktail King</h1>
                     </div>
 
-                    <div className="field">
+                    <div className="">
                         <div className="control has-icons-left">
                             <input
                                 className="input"
@@ -88,7 +92,7 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <div className="field">
+                    <div className="mt-5">
                         <div className="control has-icons-left">
                             <input
                                 className="input"
@@ -104,13 +108,12 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <p className="has-text-danger error" style={{ visibility: error ? "visible" : "hidden" }}>
+                    <p className="has-text-danger error mt-1" style={{ visibility: error ? "visible" : "hidden" }}>
                         {error}
                     </p>
 
-
                     <div id="button-section">
-                        <button type="submit" className="button is-warning mt-4">
+                        <button type="submit" className="button is-warning mt-1">
                             <FontAwesomeIcon icon={faRightToBracket} className="mr-2" />Zaloguj się
                         </button>
 
@@ -118,6 +121,7 @@ const Login = () => {
                             Nie masz konta? <a href="/register" className="has-text-warning">zarejestruj się</a>
                         </p>
                     </div>
+                    
                 </form>
             </div>
         </div>
