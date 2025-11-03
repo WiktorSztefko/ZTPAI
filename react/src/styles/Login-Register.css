@@ -1,11 +1,7 @@
-html,
-body {
-    height: 100%;
+html, body{
     width: 100%;
-    margin: 0;
-    padding: 0;
+    height: 100%;
     background-color: #000000;
-    overflow: hidden;
 }
 
 form {
@@ -16,9 +12,8 @@ h1 {
     font-size: 4em;
 }
 
-#panel-img,
-#panel-form {
-    min-height: 100vh;
+section{
+    min-height: 95vh;
 }
 
 .black {
@@ -41,16 +36,17 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-
-    body { 
-        overflow: auto;
-    }
-
     h1 {
-        font-size: 2em;
+        font-size: 3em;
     }
 
-    #button-section {
+    main {
+        display: flex;
+        flex-direction: column-reverse;
+        min-height: 100vh;
+    }
+
+    #button-div {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -58,14 +54,8 @@ h1 {
         width: 100%;
     }
 
-    #login-page {
-        display: flex;
-        flex-direction: column-reverse;
-        min-height: 100vh;
-    }
-
     #logo {
-        max-width: 120px;
+        max-width: 160px;
     }
 
     #panel-img {
@@ -80,7 +70,6 @@ h1 {
 
     #panel-form {
         min-height: auto;
-        padding: 2rem;
     }
 
     #panel-form form {

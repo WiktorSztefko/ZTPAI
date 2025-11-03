@@ -7,7 +7,7 @@ import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-sv
 import { fetchUser } from "../api/fetchUser";
 
 import "bulma/css/bulma.min.css";
-import "../styles/Login.css";
+import "../styles/Login-Register.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -58,73 +58,73 @@ const Login = () => {
     };
 
     return (
-        <div id="login-page" className="columns is-gapless">
+            <main id="login-page" className="columns is-gapless">
 
-            <div id="panel-img" className="column">
-                <img src="/images/photos/login.jpeg" alt="login" className="images-fit"/>
-            </div>
+                <section id="panel-img" className="column">
+                    <img src="/images/photos/login.jpeg" alt="login" className="images-fit"/>
+                </section>
 
-            <div
-                id="panel-form"
-                className="column is-flex is-justify-content-center is-align-items-center black">
-                
-                <form onSubmit={handleSubmit} className="box black">
-                    <div className="has-text-centered mb-4">
-                        <a href="/login">
-                            <img id="logo" src="/images/photos/logo.jpeg" alt="logo" />
-                        </a>
-                        <h1 className="has-text-white">Cocktail King</h1>
-                    </div>
-
-                    <div className="">
-                        <div className="control has-icons-left">
-                            <input
-                                className="input"
-                                type="email"
-                                placeholder="Adres email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                            <span className="icon is-small is-left has-text-warning">
-                                <FontAwesomeIcon icon={faEnvelope} />
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="mt-5">
-                        <div className="control has-icons-left">
-                            <input
-                                className="input"
-                                type="password"
-                                placeholder="Hasło"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                            <span className="icon is-small is-left has-text-warning">
-                                <FontAwesomeIcon icon={faLock} />
-                            </span>
-                        </div>
-                    </div>
-
-                    <p className="has-text-danger error mt-1" style={{ visibility: error ? "visible" : "hidden" }}>
-                        {error}
-                    </p>
-
-                    <div id="button-section">
-                        <button type="submit" className="button is-warning mt-1">
-                            <FontAwesomeIcon icon={faRightToBracket} className="mr-2" />Zaloguj się
-                        </button>
-
-                        <p className="mt-4 has-text-white">
-                            Nie masz konta? <a href="/register" className="has-text-warning">zarejestruj się</a>
-                        </p>
-                    </div>
+                <section
+                    id="panel-form"
+                    className="column is-flex is-justify-content-center is-align-items-center black">
                     
-                </form>
-            </div>
-        </div>
+                    <form onSubmit={handleSubmit} className="box black">
+                        <header className="has-text-centered mb-4">
+                            <a href="/login">
+                                <img id="logo" src="/images/photos/logo.jpeg" alt="logo" />
+                            </a>
+                            <h1 className="has-text-white">Cocktail King</h1>
+                        </header>
+
+                        <div className="">
+                            <div className="control has-icons-left">
+                                <input
+                                    className="input"
+                                    type="email"
+                                    placeholder="Adres email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                                <span className="icon is-small is-left has-text-warning">
+                                    <FontAwesomeIcon icon={faEnvelope} />
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="mt-5">
+                            <div className="control has-icons-left">
+                                <input
+                                    className="input"
+                                    type="password"
+                                    placeholder="Hasło"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <span className="icon is-small is-left has-text-warning">
+                                    <FontAwesomeIcon icon={faLock} />
+                                </span>
+                            </div>
+                        </div>
+
+                        <p className="has-text-danger error mt-1" style={{ visibility: error ? "visible" : "hidden" }}>
+                            {error}
+                        </p>
+
+                        <div id="button-div">
+                            <button type="submit" className="button is-warning mt-1">
+                                <FontAwesomeIcon icon={faRightToBracket} className="mr-2" />Zaloguj się
+                            </button>
+
+                            <p className="mt-4 has-text-white">
+                                Nie masz konta? <a href="/register" className="has-text-warning">zarejestruj się</a>
+                            </p>
+                        </div>
+                        
+                    </form>
+                </section>
+            </main>
     );
 };
 
