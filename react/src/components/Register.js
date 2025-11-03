@@ -40,22 +40,42 @@ const Register = () => {
         getUser();
     }, [navigate]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const errors = validateForm({ name, surname, username, password, confirmedPassword });
+        const errors = validateForm({ name, surname, username, email, password, confirmedPassword });
 
         setErrorName(errors.name);
         setErrorSurname(errors.surname);
         setErrorUsername(errors.username);
+        setErrorEmail(errors.email);
         setErrorPassword(errors.password);
         setErrorCorfirmedPassword(errors.confirmedPassword);
 
-        const isValid = !errors.name && !errors.surname && !errors.username && !errors.password && !errors.confirmPassword;
+       const isValid = !errors.name && !errors.surname && !errors.username && !errors.email && !errors.password && !errors.confirmedPassword;
 
-        //TODO validate from backend username or email exist
-        return isValid;
-    }
+        if (!isValid) return;
+
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, surname, username, email, password })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                setErrorUsername(result.errors?.username || "");
+                setErrorEmail(result.errors?.email || "");
+                return;
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
 
     return (
             <main  className="columns is-gapless">
