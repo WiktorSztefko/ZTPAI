@@ -10,6 +10,8 @@ import { validateForm } from "../utils/validateForm";
 import "bulma/css/bulma.min.css";
 import "../styles/Login-Register.css";
 
+import SuccessModal from "./SuccessModal";
+
 const Register = () => {
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
@@ -24,6 +26,8 @@ const Register = () => {
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
     const [errorConfirmedPassword, setErrorCorfirmedPassword] = useState("");
+
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const navigate = useNavigate();
 
@@ -71,6 +75,8 @@ const Register = () => {
                 return;
             }
 
+            setShowSuccess(true);
+
         } catch (err) {
             console.error(err);
         }
@@ -79,6 +85,7 @@ const Register = () => {
 
     return (
             <main  className="columns is-gapless">
+                {showSuccess && <SuccessModal />}
 
                 <section id="panel-img" className="column">
                     <img src="/images/photos/register.jpeg" alt="login" className="images-fit" />
