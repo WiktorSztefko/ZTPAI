@@ -1,0 +1,57 @@
+aside h2 {
+    color: white;
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+aside h3 {
+    color: #D4AF37;
+    font-size: 1.5vw;
+}
+
+aside span{
+    display: block;
+}
+
+.top-section{
+    min-height: auto;
+}
+
+.hover-effect:hover {
+    cursor: pointer;
+    filter: brightness(125%);
+    transition: transform 0.3s ease;
+    transform: scale(1.1);
+}
+
+#button-task {
+    width: 12vw;
+    background-color: #013220;
+}
+
+@media screen and (max-width: 768px) {
+
+    aside {
+        border-bottom: 1px solid #800020;
+    }
+
+    aside h2 {
+        display: flex;
+        justify-content: center;
+        gap: 0.25em;
+        font-size: 2em;
+    }
+
+    aside h3 {
+        font-size: 1.5em;
+    }
+
+    .mt-3-mobile {
+        margin-top: 3rem !important;
+    }
+
+    #button-task {
+        width: 50%;
+        margin-bottom: 1em
+    }
+}

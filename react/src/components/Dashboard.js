@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { fetchUser } from "../api/fetchUser";
 
-const Dashboard = () => {
+import "bulma/css/bulma.min.css";
+import "../styles/Dashboard.css";
+
+
+import Header from "./Header";
+import Navigation from "./Navigation";
+import MiddleSlider from "./MiddleSlider";
+import TilesSection from "./TilesSection";
+import Footer from "./Footer";
+
+const Dashboard = ({ isAdmin }) => {
+
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
@@ -22,18 +32,40 @@ const Dashboard = () => {
         };
 
         getUser();
+    
     }, [navigate]);
 
-    if (!user) return <p></p>;
+    //if (!user) return <p></p>;
 
     return (
-        <div>
-            <main style={{ padding: "20px" }}>
-                <h2>Welcome!</h2>
-                <p>Email: {user.email}</p>
-                <p>Username: {user.username}</p>
-            </main>
-        </div>
+        <>
+            <Header />
+            <section className="mt-5 top-section">
+                <div className="columns is-gapless">
+                        <div className="column is-2">
+                            <Navigation isAdministrator={isAdmin}/>
+                        </div>
+                        <div className="column is-8">
+                            <MiddleSlider />
+                        </div>
+                    <aside className="column is-2 has-text-centered mt-3-mobile">
+                        <div>
+                            <h2>
+                                <span>Mistrz</span>
+                                <span>Barmańskiej</span>
+                                <span>Sztuki</span>
+                            </h2>
+
+                            <button id="button-task" class="button mt-2 has-text-white hover-effect">
+                                Wylosuj Zadanie
+                            </button>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+            <TilesSection />
+            <Footer />
+        </>
     );
 };
 

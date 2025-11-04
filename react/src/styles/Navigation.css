@@ -1,0 +1,47 @@
+.text *
+{
+    color: #D4AF37;
+    font-size: clamp(0.5rem, 1.5vw, 2.5em);
+    margin-left: 1em;
+}
+.icon-adjust{
+    color: #D4AF37;
+    font-size: clamp(0.5rem, 1vw, 2em);
+    position: relative;
+    top: -3px;
+}
+
+.hover-effect:hover {
+    cursor: pointer;
+    filter: brightness(125%);
+    transition: transform 0.3s ease;
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+    nav{
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid #800020;
+        border-bottom: 1px solid #800020;
+        padding: 0.5em;
+    }
+    ul{
+        display: flex;
+        width: 80%;
+        justify-content: space-around;
+    }
+
+    .text *{
+        margin-left: 0;
+    }
+
+    .text span {
+        display: none;
+    }
+
+    .icon-adjust {
+            font-size: 1.8rem;
+            top: 0;       
+    }
+}

@@ -1,0 +1,16 @@
+/* kolor wszystkich kropek */
+.slick-dots li button:before {
+    color: #D4AF37;
+    font-size: 12px;
+}
+
+/* kolor aktywnej kropki */
+.slick-dots li.slick-active button:before {
+    color: #800020;
+}
+
+/* strzałki */
+.slick-prev:before,
+.slick-next:before {
+    color: #D4AF37;
+}
