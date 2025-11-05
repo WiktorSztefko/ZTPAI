@@ -23,11 +23,37 @@ Wyłączenie kontenerów:
 
 Wszystkie komponenty działają w odizolowanych kontenerach Dockerowych i komunikują się w ramach wspólnej sieci (app-network).
 
+## Mechanizm autoryzacji i przekierowań
+Aplikacja implementuje kontrolę dostępu i automatyczne przekierowania w zależności od statusu zalogowania użytkownika.
+
+### Użytkownik niezalogowany
+Ma dostęp tylko do następujących stron:
+- /login – formularz logowania
+- /register – rejestracja nowego użytkownika
+- Próba wejścia na inną stronę powoduje automatyczne przekierowanie na stronę logowania /login
+
+### Użytkownik zalogowany
+Ma dostęp do następujących stron:
+- /dashboard – strona główna aplikacji
+- Próba wejścia na inną stronę powoduje automatyczne przekierowanie na stronę główną /dashboard
+
 ## Struktura
 - docker/ – zawiera pliki Dockerfile i konfiguracje dla poszczególnych technologii.
 - symfony/ – kod źródłowy backendu Symfony.
 - react/ – kod źródłowy frontend React.
+- postgres/ - pliki bazy danych postgreSQL
 - docker-compose.yml – definiuje wszystkie kontenery i ich sieci, porty oraz zależności.
+
+## Budowanie i wdrażanie frontendu React w środowisku Symfony 
+1. Wejście do katalogu z projektem React
+- cd react
+2. Zbudowanie aplikacji produkcyjnej
+- npm run build
+3. Skopiowanie wygenerowanych plików do katalogu public Symfony
+- cp -r build/* ../symfony/public
+4. Przebudowanie i uruchomienie kontenerów Dockera
+docker compose build
+docker compose up
 
 ## Informacje dodatkowe
 Do kontenera kopiowany jest composer - [Dockerfile](/docker/backend/Dockerfile)
