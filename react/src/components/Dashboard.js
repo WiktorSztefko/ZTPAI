@@ -12,9 +12,10 @@ import MiddleSlider from "./MiddleSlider";
 import TilesSection from "./TilesSection";
 import Footer from "./Footer";
 
-const Dashboard = ({ isAdmin }) => {
+const Dashboard = () => {
 
     const [user, setUser] = useState(null);
+    const [isAdministrator, setIsAdministrator] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,6 +29,10 @@ const Dashboard = ({ isAdmin }) => {
 
             if (result.data) {
                 setUser(result.data);
+                
+                if (Array.isArray(result.data.roles) && result.data.roles.includes("administrator")) {
+                    setIsAdministrator(true);
+                }
             }
         };
 
@@ -35,7 +40,7 @@ const Dashboard = ({ isAdmin }) => {
     
     }, [navigate]);
 
-    //if (!user) return <p></p>;
+    if (!user) return <p></p>;
 
     return (
         <>
@@ -43,7 +48,7 @@ const Dashboard = ({ isAdmin }) => {
             <section className="mt-5 top-section">
                 <div className="columns is-gapless">
                         <div className="column is-2">
-                            <Navigation isAdministrator={isAdmin}/>
+                            <Navigation isAdministrator={isAdministrator}/>
                         </div>
                         <div className="column is-8">
                             <MiddleSlider />

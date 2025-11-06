@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faMartiniGlass, faWineBottle, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faMartiniGlass, faWineBottle, faUser, faFile } from '@fortawesome/free-solid-svg-icons';
 
 import "../styles/Navigation.css";
 
@@ -35,14 +35,14 @@ const Navigation = ({ isAdministrator = false }) => {
                             <span className="ml-1">Konto</span>
                         </Link>
                     </li>
-                    {/* {isAdministrator && (
-                        <li className="hover-effect">
+                    {isAdministrator && (
+                        <li className="hover-effect text">
                             <Link to="/upload">
-                                <i className="fa-solid fa-file-arrow-up"></i>
-                                <span className="is-size-2">Upload</span>
+                                <FontAwesomeIcon icon={faFile} className="icon-adjust" />
+                                <span className="ml-1">Upload</span>
                             </Link>
                         </li>
-                    )} */}
+                    )}
                 </ul>
             </nav>
         </div>
