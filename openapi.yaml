@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Cocktail Ling - API
+  version: 1.0.0
+  description: Dokumentacja API projektu Cocktail King
+servers:
+  - url: http://localhost:8000
+    description: Serwer lokalny
+
+paths:
+  /api/login:
+    post:
+      summary: Logowanie użytkownika
+      description: Zaloguj użytkownika przy użyciu email i hasła. Tworzy sesję użytkownika.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login udany
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Brak danych do logowania
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '401':
+          description: Nieprawidłowy login lub hasło
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+
+  /api/register:
+    post:
+      summary: Rejestracja użytkownika
+      description: Rejestruje nowego użytkownika i jego szczegóły.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Rejestracja udana
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Błędy walidacji (email lub username już istnieje)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrors'
+
+  /api/user:
+    get:
+      summary: Pobierz dane zalogowanego użytkownika
+      description: Zwraca informacje o użytkowniku aktualnie zalogowanym w sesji.
+      responses:
+        '200':
+          description: Dane użytkownika
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: Użytkownik niezalogowany
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '404':
+          description: Użytkownik nie znaleziony
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: jan.kowalski@example.com
+        password:
+          type: string
+          format: password
+          example: tajnehaslo123
+
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: JohnSnow
+        email:
+          type: string
+          format: email
+          example: john.snow@example.com
+        password:
+          type: string
+          format: password
+          example: T@jneha$l*123
+        name:
+          type: string
+          example: John
+        surname:
+          type: string
+          example: Snow
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: JohnSnow
+        email:
+          type: string
+          format: email
+          example: john.snow@example.com
+        name:
+          type: string
+          example: John
+        surname:
+          type: string
+          example: Snow
+        roles:
+          type: array
+          items:
+            type: string
+          example: ["ROLE_ADMIN", "ROLE_USER"]
+
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Przykładowy tekst wiadomości
+
+    ValidationErrors:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            email: Podany email już istnieje
+            username: Podana nazwa użytkownika juźistnieje
