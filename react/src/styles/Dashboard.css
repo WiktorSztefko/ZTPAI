@@ -27,6 +27,7 @@ aside span{
 #button-task {
     width: 12vw;
     background-color: #013220;
+    font-size: 1vw;
 }
 
 @media screen and (max-width: 768px) {
@@ -52,6 +53,7 @@ aside span{
 
     #button-task {
         width: 50%;
-        margin-bottom: 1em
+        margin-bottom: 1em;
+        font-size: 1em
     }
 }

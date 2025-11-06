@@ -40,7 +40,7 @@ const Dashboard = () => {
     
     }, [navigate]);
 
-    if (!user) return <p></p>;
+   // if (!user) return <p></p>;
 
     return (
         <>
