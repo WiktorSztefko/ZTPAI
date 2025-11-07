@@ -1,7 +1,7 @@
 import React from "react";
 
 import "bulma/css/bulma.min.css";
-
+import "../styles/App.css";
 import "../styles/TilesSection.css";
 
 const tiles = [

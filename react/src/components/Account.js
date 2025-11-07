@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 import "bulma/css/bulma.min.css";
+import "../styles/App.css";
 import "../styles/Account.css";
 
 import Header from "./Header";
@@ -36,9 +37,23 @@ const Account = () => {
         };
 
         getUser();
-        console.log(user.roles)
     
     }, [navigate]);
+
+    const logoutUser = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/api/logout", {
+                method: "POST",
+                credentials: "include",
+            });
+
+            if (response.ok) 
+                navigate("/login");
+            
+        } catch (error) {
+            console.error("Logout error:", error);
+        }
+    };
 
     if (!user) return <p></p>;
 
@@ -49,39 +64,39 @@ const Account = () => {
                 <div className="column is-2">
                     <Navigation isAdministrator={isAdministrator} />
                 </div>
-                <main className="column">
+                <main className="column panel-account">
 
-                    <div class="is-flex mt-2 mb-2">
-                        <div class="field-header">Imię:</div>
-                        <div class="field-content">{user.name}</div>
+                    <div class="is-flex mb-2 mobile-mt-2">
+                        <span class="field-header">Imię:</span>
+                        <span class="field-content">{user.name}</span>
                     </div>
 
                     <div class="is-flex mt-2 mb-2">
-                        <div class="field-header">Nazwisko:</div>
-                        <div class="field-content">{user.surname}</div>
+                        <span class="field-header">Nazwisko:</span>
+                        <span class="field-content">{user.surname}</span>
                     </div>
 
                     <div class="is-flex mt-2 mb-2">
-                        <div class="field-header">Nazwa Użytkownika:</div>
-                        <div class="field-content">{user.username}</div>
+                        <span class="field-header">Nazwa Użytkownika:</span>
+                        <span class="field-content">{user.username}</span>
                     </div>
 
                     <div class="is-flex mt-2 mb-2">
-                        <div class="field-header">Adres mailowy:</div>
-                        <div class="field-content">{user.email}</div>
+                        <span class="field-header">Adres mailowy:</span>
+                        <span class="field-content">{user.email}</span>
                     </div>
 
                     <div class="is-flex mt-2 mb-2">
-                        <div className="field-header">Typ konta:</div>
-                        <div className="field-content">
+                        <span className="field-header">Typ konta:</span>
+                        <span className="field-content">
                             {Array.isArray(user.roles) && user.roles.length > 0
                                 ? user.roles.join(", ")
                                 : ""}
-                        </div>
+                        </span>
                     </div>
 
-                    <div class="is-flex  mt-2 mb-2 field-header button-div">
-                        <button id="button-logout" className="button is-warning">
+                    <div class="is-flex mt-2 mb-2 button-div">
+                        <button id="button-logout" className="button is-warning" onClick={logoutUser}>
                             <FontAwesomeIcon icon={faRightToBracket} className="mr-2" />Wyloguj
                         </button>
                     </div>

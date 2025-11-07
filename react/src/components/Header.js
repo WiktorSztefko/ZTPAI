@@ -14,9 +14,11 @@ const Header = () => {
                     alt="logo"
                 />
             </Link>
-            <h1 className="has-text-white has-text-centered ml-3">
-                Cocktail King
-            </h1>
+            <Link to="/dashboard">
+                <h1 className="has-text-white has-text-centered ml-3">
+                    Cocktail King
+                </h1>
+            </Link>
         </header>
     );
 };

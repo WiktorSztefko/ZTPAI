@@ -4,6 +4,7 @@
     font-size: 1.5vw;
     margin-left: 1em;
 }
+
 .icon-adjust{
     color: #D4AF37;
     font-size: 1vw;
@@ -32,7 +33,7 @@
         justify-content: space-between;
     }
 
-    .text *{
+    .text * {
         margin-left: 0;
     }
 
@@ -41,7 +42,7 @@
     }
 
     .icon-adjust {
-            font-size: 1.8rem;
-            top: 0;       
+        font-size: 1.8rem;
+        top: 0;       
     }
 }

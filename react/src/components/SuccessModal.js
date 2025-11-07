@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "../styles/App.css";
 import "../styles/SuccessModal.css";
 
 const SuccessModal= () => {

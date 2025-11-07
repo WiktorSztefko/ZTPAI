@@ -4,11 +4,6 @@ aside h2 {
     font-weight: bold;
 }
 
-aside h3 {
-    color: #D4AF37;
-    font-size: 1.5vw;
-}
-
 aside span{
     display: block;
 }
@@ -25,9 +20,9 @@ aside span{
 }
 
 #button-task {
-    width: 12vw;
+    width: 14vw;
     background-color: #013220;
-    font-size: 1vw;
+    font-size: 1.5vw;
 }
 
 @media screen and (max-width: 768px) {
@@ -41,10 +36,6 @@ aside span{
         justify-content: center;
         gap: 0.25em;
         font-size: 2em;
-    }
-
-    aside h3 {
-        font-size: 1.5em;
     }
 
     .mt-3-mobile {

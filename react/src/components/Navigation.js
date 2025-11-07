@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faMartiniGlass, faWineBottle, faUser, faFile } from '@fortawesome/free-solid-svg-icons';
 
+import "../styles/App.css";
 import "../styles/Navigation.css";
 
 const Navigation = ({ isAdministrator = false }) => {
@@ -12,7 +13,7 @@ const Navigation = ({ isAdministrator = false }) => {
             <nav>
                 <ul className="desktop-icons">
                     <li className="hover-effect text">
-                        <Link to="/main">
+                        <Link to="/dashboard">
                             <FontAwesomeIcon icon={faHouse} className="icon-adjust"  />
                             <span className="ml-1">Strona główna</span>
                         </Link>

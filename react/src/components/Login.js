@@ -7,6 +7,7 @@ import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-sv
 import { fetchUser } from "../api/fetchUser";
 
 import "bulma/css/bulma.min.css";
+import "../styles/App.css";
 import "../styles/Login-Register.css";
 
 const Login = () => {

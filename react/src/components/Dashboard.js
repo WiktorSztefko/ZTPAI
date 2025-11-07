@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchUser } from "../api/fetchUser";
 
 import "bulma/css/bulma.min.css";
+import "../styles/App.css";
 import "../styles/Dashboard.css";
 
 
@@ -40,20 +41,24 @@ const Dashboard = () => {
     
     }, [navigate]);
 
-   //if (!user) return <p></p>;
+    if (!user) return <p></p>;
 
     return (
         <>
             <Header />
             <section className="mt-5 top-section">
                 <div className="columns is-gapless">
+
                         <div className="column is-2">
                             <Navigation isAdministrator={isAdministrator}/>
                         </div>
+
                         <div className="column is-8">
                             <MiddleSlider />
                         </div>
+
                     <aside className="column is-2 has-text-centered mt-3-mobile">
+
                         <div>
                             <h2>
                                 <span>Mistrz</span>
@@ -65,6 +70,7 @@ const Dashboard = () => {
                                 Wylosuj Zadanie
                             </button>
                         </div>
+
                     </aside>
                 </div>
             </section>

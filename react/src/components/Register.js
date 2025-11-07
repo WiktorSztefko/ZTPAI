@@ -8,6 +8,7 @@ import { fetchUser } from "../api/fetchUser";
 import { validateForm } from "../utils/validateForm";
 
 import "bulma/css/bulma.min.css";
+import "../styles/App.css";
 import "../styles/Login-Register.css";
 
 import SuccessModal from "./SuccessModal";

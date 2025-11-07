@@ -1,6 +1,7 @@
 header {
     min-height: 14vh;
 }
+
 footer {
     min-height: 5vh;
     border-top: 1px solid #800020;
@@ -9,16 +10,13 @@ footer {
     margin-top: 2em;
     text-align: center;
 }
-main {
+
+.panel-notfound {
     min-height: calc(100vh - 14vh - 5vh - 2em - 12px);
 }
 
-.title, .subtitle, .icons{ 
+.panel-notfound *{ 
     color: #800020;
-}
-
-.subtitle {
-    margin-bottom: 0 !important;
 }
 
 .icons {

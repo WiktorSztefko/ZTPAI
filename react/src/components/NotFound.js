@@ -6,11 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWineGlass, faWhiskeyGlass, faMartiniGlassCitrus } from '@fortawesome/free-solid-svg-icons';
 
 import "bulma/css/bulma.min.css";
+import "../styles/App.css";
 import "../styles/NotFound.css";
 
-
 import Header from "./Header";
-
 import Footer from "./Footer";
 
 const Dashboard = () => {
@@ -20,16 +19,15 @@ const Dashboard = () => {
     return (
         <>
             <Header />
-            <main class="section has-text-centered is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
-                <h1 class="title is-1 has-text-weight-bold">Code 404</h1>
-                <h2 class="subtitle is-3 mt-3">Przepraszamy, ale taka strona nie istnieje.</h2>
-                <div class="icons mt-3">
+            <main class="section has-text-centered is-flex is-justify-content-center is-align-items-center is-flex-direction-column panel-notfound">
+                <h1 class="title is-1 mt-1 mb-1 has-text-weight-bold">Code 404</h1>
+                <h2 class="subtitle is-3 mt-1 mb-1">Przepraszamy, ale taka strona nie istnieje.</h2>
+                <div class="icons mt-1 mb-1">
                     <FontAwesomeIcon icon={faWineGlass} />
                     <FontAwesomeIcon icon={faWhiskeyGlass} />
                     <FontAwesomeIcon icon={faMartiniGlassCitrus} />
                 </div>
             </main>
-
             <Footer />
         </>
     );

@@ -16,10 +16,6 @@ section{
     min-height: 95vh;
 }
 
-.black {
-    background-color: #000000;
-}
-
 .error {
     min-height: 1.5em;
 }
