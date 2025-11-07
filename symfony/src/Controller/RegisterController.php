@@ -56,6 +56,12 @@ class RegisterController extends AbstractController
         $em->persist($user);
         $em->flush();
 
+        $connection = $em->getConnection();
+        $connection->insert('users_roles', [
+            'id_user' => $user->getId(),
+            'id_role' => 2
+        ]);
+
         return new JsonResponse(['message' => 'User registered successfully'], 201);
     }
 }
