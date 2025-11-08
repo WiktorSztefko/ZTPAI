@@ -5,6 +5,7 @@ import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import Account from "./components/Account";
 import NotFound from "./components/NotFound";
+import GalleryAlcohols from './components/GalleryAlcohols';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/alcohols" element={<GalleryAlcohols/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

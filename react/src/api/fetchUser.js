@@ -1,7 +1,8 @@
-// src/api/user.js
+import { API_URL } from "./url";
+
 export const fetchUser = async () => {
     try {
-        const response = await fetch("http://localhost:8000/api/user", {
+        const response = await fetch(`${API_URL}/api/user`, {
             method: "GET",
             credentials: "include",
         });

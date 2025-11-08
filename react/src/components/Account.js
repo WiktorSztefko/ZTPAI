@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchUser } from "../api/fetchUser";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+
+import { fetchUser } from "../api/fetchUser";
+import { API_URL } from "../api/url";
 
 import "bulma/css/bulma.min.css";
 import "../styles/App.css";
@@ -29,7 +31,7 @@ const Account = () => {
 
             if (result.data) {
                 setUser(result.data);
-            
+
                 if (Array.isArray(result.data.roles) && result.data.roles.includes("administrator")) {
                     setIsAdministrator(true);
                 }
@@ -37,19 +39,19 @@ const Account = () => {
         };
 
         getUser();
-    
+
     }, [navigate]);
 
     const logoutUser = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/logout", {
+            const response = await fetch(`${API_URL}/api/logout`, {
                 method: "POST",
                 credentials: "include",
             });
 
-            if (response.ok) 
+            if (response.ok)
                 navigate("/login");
-            
+
         } catch (error) {
             console.error("Logout error:", error);
         }

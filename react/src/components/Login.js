@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchUser } from "../api/fetchUser";
+import { API_URL } from "../api/url";
 
 import "bulma/css/bulma.min.css";
 import "../styles/App.css";
@@ -35,7 +36,7 @@ const Login = () => {
         setError("");
 
         try {
-            const response = await fetch("http://localhost:8000/api/login", {
+            const response = await fetch(`${API_URL}/api/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
