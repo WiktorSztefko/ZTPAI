@@ -32,11 +32,11 @@ class RegisterController extends AbstractController
         $errors = [];
 
         if ($userRepository->findOneBy(['email' => $email])) {
-            $errors['email'] = 'Podany email już istnieje';
+            $errors['email'] = 'Podany adres email już istnieje';
         }
 
         if ($userRepository->findOneBy(['username' => $username])) {
-            $errors['username'] = 'Podana nazwa użytkownika istnieje';
+            $errors['username'] = 'Podana nazwa użytkownika  już istnieje';
         }
 
         if (!empty($errors)) {

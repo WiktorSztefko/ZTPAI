@@ -38,7 +38,7 @@ class LoginController extends AbstractController
 
         if (!$user || !$this->passwordHasher->isPasswordValid($user, $password)) {
             return new JsonResponse([
-                'message' => 'Invalid login or password',
+                'message' => 'Nieprawidłowy login lub hasło',
             ], 401);
         }
 
