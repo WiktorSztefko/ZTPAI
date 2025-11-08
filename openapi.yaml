@@ -20,19 +20,19 @@ paths:
               $ref: '#/components/schemas/LoginRequest'
       responses:
         '200':
-          description: Login udany
+          description: Login successful
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
         '400':
-          description: Brak danych do logowania
+          description: No login data
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
         '401':
-          description: Nieprawidłowy login lub hasło
+          description: Invalid login or password
           content:
             application/json:
               schema:
@@ -50,13 +50,13 @@ paths:
               $ref: '#/components/schemas/RegisterRequest'
       responses:
         '201':
-          description: Rejestracja udana
+          description: User registered successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
         '400':
-          description: Błędy walidacji (email lub username już istnieje)
+          description: Podany adres email już istnieje | Podana nazwa użytkownika już istnieje'
           content:
             application/json:
               schema:
@@ -74,13 +74,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
         '401':
-          description: Użytkownik niezalogowany
+          description: User not logged in
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
         '404':
-          description: Użytkownik nie znaleziony
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+
+    /api/logout:
+    post:
+      summary: Wylogowanie użytkownika
+      description: Unieważnia aktualną sesję użytkownika i kończy jego zalogowanie.
+      responses:
+        '200':
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '401':
+          description: No user is currently logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '500':
+          description: Session not found or already invalidated | Server error
           content:
             application/json:
               schema:
@@ -164,5 +188,5 @@ components:
           additionalProperties:
             type: string
           example:
-            email: Podany email już istnieje
-            username: Podana nazwa użytkownika juźistnieje
+            email: Podany adres email już istnieje
+            username: Podana nazwa użytkownika juź istnieje
