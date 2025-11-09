@@ -28,7 +28,7 @@ class User implements PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(name: "id_user_details", referencedColumnName: "id_user_details", onDelete: "CASCADE")]
     private ?UserDetails $details = null;
 
-    #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: "users")]
+    #[ORM\ManyToMany(targetEntity: UserRole::class, inversedBy: "users")]
     #[ORM\JoinTable(
         name: "users_roles",
         joinColumns: [new ORM\JoinColumn(name: "id_user", referencedColumnName: "id_user")],
@@ -95,7 +95,7 @@ class User implements PasswordAuthenticatedUserInterface
         return $this->roles;
     }
 
-    public function addRole(Role $role): self
+    public function addRole(UserRole $role): self
     {
         if (!$this->roles->contains($role)) {
             $this->roles->add($role);
@@ -103,7 +103,7 @@ class User implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeRole(Role $role): self
+    public function removeRole(UserRole $role): self
     {
         $this->roles->removeElement($role);
         return $this;

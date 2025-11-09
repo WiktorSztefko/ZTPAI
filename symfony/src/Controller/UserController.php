@@ -11,7 +11,7 @@ use App\Repository\UserRepository;
 class UserController extends AbstractController
 {
     #[Route('/api/user', name: 'api_user', methods: ['GET'])]
-    public function index(SessionInterface $session, UserRepository $userRepository): JsonResponse
+    public function getUserData(SessionInterface $session, UserRepository $userRepository): JsonResponse
     {
         $userId = $session->get('user_id');
 
@@ -35,14 +35,19 @@ class UserController extends AbstractController
 
         $roles = $user->getRoles()->map(fn($role) => $role->getNameRole())->toArray();
 
-        return new JsonResponse([
+        $data = [
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'name' => $user->getDetails()?->getName(),
             'surname' => $user->getDetails()?->getSurname(),
             'roles' => $roles,
-        ]);
+        ];
+
+        $response = new JsonResponse($data, 200);
+        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+
+        return $response;
     }
 
 }

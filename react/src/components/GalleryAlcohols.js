@@ -15,15 +15,10 @@ import Navigation from "./Navigation";
 import Footer from "./Footer";
 
 const GalleryAlcohols = () => {
-    const [isAdministrator, setIsAdministrator] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const getUser = async () => {
-            setIsAdministrator(true);
-        };
-
-        getUser();
+       
 
     }, [navigate]);
 
@@ -32,7 +27,7 @@ const GalleryAlcohols = () => {
             <Header />
             <div className="columns is-gapless">
                 <div className="column is-2">
-                    <Navigation isAdministrator={isAdministrator} />
+                    <Navigation />
                 </div>
                 <main className="column">
 

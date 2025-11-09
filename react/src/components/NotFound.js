@@ -12,9 +12,7 @@ import "../styles/NotFound.css";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const Dashboard = () => {
-
-
+const NotFound = () => {
 
     return (
         <>
@@ -33,4 +31,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default NotFound

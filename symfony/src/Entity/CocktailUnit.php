@@ -6,7 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: "units")]
-class Unit
+class CocktailUnit
+
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

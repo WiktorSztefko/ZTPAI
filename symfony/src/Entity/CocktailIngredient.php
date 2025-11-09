@@ -21,9 +21,9 @@ class CocktailIngredient
     #[ORM\Column(type: "float")]
     private float $quantity;
 
-    #[ORM\ManyToOne(targetEntity: "Unit")]
+    #[ORM\ManyToOne(targetEntity: "CocktailUnit")]
     #[ORM\JoinColumn(name: "id_unit", referencedColumnName: "id_unit", nullable: true)]
-    private ?Unit $unit = null;
+    private ?CocktailUnit $unit = null;
 
     public function getCocktail(): ?Cocktail
     {
@@ -58,12 +58,12 @@ class CocktailIngredient
         return $this;
     }
 
-    public function getUnit(): ?Unit
+    public function getUnit(): ?CocktailUnit
     {
         return $this->unit;
     }
 
-    public function setUnit(?Unit $unit): self
+    public function setUnit(?CocktailUnit $unit): self
     {
         $this->unit = $unit;
         return $this;

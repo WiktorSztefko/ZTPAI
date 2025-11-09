@@ -17,7 +17,6 @@ import Footer from "./Footer";
 
 const Account = () => {
     const [user, setUser] = useState(null);
-    const [isAdministrator, setIsAdministrator] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,10 +30,6 @@ const Account = () => {
 
             if (result.data) {
                 setUser(result.data);
-
-                if (Array.isArray(result.data.roles) && result.data.roles.includes("administrator")) {
-                    setIsAdministrator(true);
-                }
             }
         };
 
@@ -64,7 +59,7 @@ const Account = () => {
             <Header />
             <div className="columns is-gapless">
                 <div className="column is-2">
-                    <Navigation isAdministrator={isAdministrator} />
+                    <Navigation />
                 </div>
                 <main className="column panel-account">
 

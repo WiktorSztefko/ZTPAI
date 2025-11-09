@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: "roles")]
-class Role
+class UserRole
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -10,9 +10,9 @@ use App\Repository\AlcoholRepository;
 class AlcoholController extends AbstractController
 {
     #[Route('/api/alcohols', name: 'api_alcohols', methods: ['GET'])]
-    public function index(AlcoholRepository $alcoholRepository): JsonResponse
+    public function alcohols(AlcoholRepository $alcoholRepository): JsonResponse
     {
-        $alcohols = $alcoholRepository->findAll();
+        $alcohols = $alcoholRepository->findBy([], ['id_alcohol' => 'ASC']);
 
         if (empty($alcohols)) {
             return new JsonResponse(['message' => 'No alcohols found'], 404);
@@ -24,6 +24,9 @@ class AlcoholController extends AbstractController
             'image' => $alcohol->getImage(),
         ], $alcohols);
 
-        return new JsonResponse($data);
+        $response = new JsonResponse($data, 200);
+        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+
+        return $response;
     }
 }

@@ -30,10 +30,6 @@ const Dashboard = () => {
 
             if (result.data) {
                 setUser(result.data);
-                
-                if (Array.isArray(result.data.roles) && result.data.roles.includes("administrator")) {
-                    setIsAdministrator(true);
-                }
             }
         };
 
@@ -50,7 +46,7 @@ const Dashboard = () => {
                 <div className="columns is-gapless">
 
                         <div className="column is-2">
-                            <Navigation isAdministrator={isAdministrator}/>
+                            <Navigation />
                         </div>
 
                         <div className="column is-8">
