@@ -4,14 +4,21 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CocktailRepository;
 
 class CocktailController extends AbstractController
 {
     #[Route('/api/cocktails', name: 'api_cocktails', methods: ['GET'])]
-    public function cocktails(CocktailRepository $cocktailRepository): JsonResponse
+    public function cocktails(SessionInterface $session, CocktailRepository $cocktailRepository): JsonResponse
     {
+        $userId = $session->get('user_id');
+
+        if (!$userId) {
+            return new JsonResponse(['message' => 'User not logged in'], 401);
+        }
+
         $cocktails = $cocktailRepository->findBy([], ['id_cocktail' => 'ASC']);
 
         if (empty($cocktails)) {
@@ -33,8 +40,14 @@ class CocktailController extends AbstractController
     }
 
     #[Route('/api/cocktails/{slug}', name: 'api_cocktail_detail', methods: ['GET'])]
-    public function cocktail(string $slug, CocktailRepository $cocktailRepository): JsonResponse
+    public function cocktail(SessionInterface $session, CocktailRepository $cocktailRepository, string $slug): JsonResponse
     {
+        $userId = $session->get('user_id');
+
+        if (!$userId) {
+            return new JsonResponse(['message' => 'User not logged in'], 401);
+        }
+
         $name = str_replace('-', ' ', $slug);
 
         $cocktail = $cocktailRepository->createQueryBuilder('c')
