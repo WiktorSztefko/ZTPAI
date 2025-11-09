@@ -16,7 +16,7 @@ const TilesSection = () => {
         <section className="bottom-section mt-5">
             <div className="columns is-justify-content-space-around is-multiline ">
                 {tiles.map((tile, index) => (
-                    <div key={index} className="column is-one-fifth ">
+                    <div key={index} className="column is-one-fifth mt-3">
                         <div className="tile-card">
                             <figure className="image is-square">
                                 <img src={tile.img} alt={tile.text} />
