@@ -11,7 +11,7 @@
 }
 
 .modal-box {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
     padding: 40px 60px;
@@ -41,7 +41,7 @@
 }
 
 .circle-number {
-    color: #CAA12B;
+    color: var(--primary-color);
     font-size: 1.8rem;
     font-weight: bold;
     position: absolute;

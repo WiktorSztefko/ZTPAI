@@ -1,8 +1,15 @@
 footer{
     min-height: 5vh;
-    border-top: 1px solid #800020;
-    color: #D4AF37;
+    border-top: 1px solid var(--secondary-color);
+    color: var(--primary-color);
     line-height: 5vh;
     margin-top: 2em;
     text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+
+    footer span {
+        font-size: 0.8em;
+    }
 }

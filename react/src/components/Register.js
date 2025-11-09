@@ -94,9 +94,9 @@ const Register = () => {
 
                 <section
                     id="panel-form"
-                    className="column is-flex is-justify-content-center is-align-items-center black">
+                    className="column is-flex is-justify-content-center is-align-items-center">
 
-                    <form onSubmit={handleSubmit} className="box black">
+                    <form onSubmit={handleSubmit} className="box">
                         <header className="has-text-centered mb-4">
                             <a href="/login">
                                 <img id="logo" src="/images/photos/logo.jpeg" alt="logo" />

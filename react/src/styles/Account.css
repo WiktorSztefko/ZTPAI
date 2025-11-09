@@ -3,7 +3,7 @@
 }
 
 .field-header {
-    color: #D4AF37;
+    color: var(--primary-color);
     font-size: 1.5vw;
     font-weight: bold;
 }

@@ -1,10 +1,11 @@
 #gallery{
     margin: 0 2em 1em 0;
+    min-height: calc(100vh - 14vh - 5vh - 2em - 12px);
 }
 
 .card {
-    background: #000000;
-    border: 1px solid #D4AF37;
+    background: black;
+    border: 1px solid var(--primary-color);
     border-radius: 8px;
     padding: 1rem 1rem 0rem 1rem;
 }
@@ -14,19 +15,20 @@
 }
 
 .card:hover {
-    box-shadow: 0 6px 15px rgb(0, 80, 40);
+    box-shadow: 0 6px 15px var(--tertiary-color);
     cursor: pointer;
 }
 
 .alcohol-caption {
-    border-top: 1px solid #D4AF37;
-    color: #D4AF37;
+    border-top: 1px solid var(--primary-color);
+    color: var(--primary-color);
     font-size: 1vw;
     margin-top: 0.5em;
     padding: 0.5rem;
 }
 
 .image-wrapper {
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
 }

@@ -1,12 +1,12 @@
 .text *
 {
-    color: #D4AF37;
+    color: var(--primary-color);
     font-size: 1.5vw;
     margin-left: 1em;
 }
 
 .icon-adjust{
-    color: #D4AF37;
+    color: var(--primary-color);
     font-size: 1vw;
     position: relative;
     top: -3px;
@@ -23,8 +23,8 @@
     nav{
         display: flex;
         justify-content: center;
-        border-top: 1px solid #800020;
-        border-bottom: 1px solid #800020;
+        border-top: 1px solid var(--secondary-color);
+        border-bottom: 1px solid var(--secondary-color);
         padding: 0.8em;
     }
     ul{
