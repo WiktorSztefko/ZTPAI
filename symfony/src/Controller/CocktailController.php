@@ -12,7 +12,6 @@ class CocktailController extends AbstractController
     #[Route('/api/cocktails', name: 'api_cocktails', methods: ['GET'])]
     public function cocktails(CocktailRepository $cocktailRepository): JsonResponse
     {
-        // pobieramy wszystkie koktajle posortowane po id_cocktail rosnąco
         $cocktails = $cocktailRepository->findBy([], ['id_cocktail' => 'ASC']);
 
         if (empty($cocktails)) {
@@ -34,9 +33,8 @@ class CocktailController extends AbstractController
     }
 
     #[Route('/api/cocktails/{slug}', name: 'api_cocktail_detail', methods: ['GET'])]
-    public function show(string $slug, CocktailRepository $cocktailRepository): JsonResponse
+    public function cocktail(string $slug, CocktailRepository $cocktailRepository): JsonResponse
     {
-
         $name = str_replace('-', ' ', $slug);
 
         $cocktail = $cocktailRepository->createQueryBuilder('c')
@@ -52,6 +50,12 @@ class CocktailController extends AbstractController
             );
         }
 
+        $ingredientsData = array_map(fn($ci) => [
+            'name' => $ci->getIngredient()->getName(),
+            'quantity' => $ci->getQuantity(),
+            'unit' => $ci->getUnit()?->getName()
+        ], $cocktail->getIngredients()->toArray());
+
         $data = [
             'id_cocktail' => $cocktail->getId(),
             'name' => $cocktail->getName(),
@@ -60,12 +64,12 @@ class CocktailController extends AbstractController
             'image' => $cocktail->getImage(),
             'difficulty_level' => $cocktail->getDifficultyLevel(),
             'preparation_instruction' => $cocktail->getPreparationInstruction(),
+            'ingredients' => $ingredientsData,
         ];
 
-        return new JsonResponse(
-            $data,
-            200
-        );
-    }
+        $response = new JsonResponse($data, 200);
+        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
 
+        return $response;
+    }
 }

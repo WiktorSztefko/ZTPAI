@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 #[ORM\Entity(repositoryClass: "App\Repository\CocktailRepository")]
 #[ORM\Table(name: "cocktails")]
 class Cocktail
@@ -30,6 +33,14 @@ class Cocktail
 
     #[ORM\Column(type: "text")]
     private string $preparation_instruction;
+
+    #[ORM\OneToMany(mappedBy: "cocktail", targetEntity: CocktailIngredient::class)]
+    private Collection $ingredients;
+
+    public function __construct()
+    {
+        $this->ingredients = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -100,5 +111,10 @@ class Cocktail
     {
         $this->preparation_instruction = $preparation_instruction;
         return $this;
+    }
+
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
     }
 }
