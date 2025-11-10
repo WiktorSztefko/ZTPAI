@@ -62,6 +62,7 @@ const Register = () => {
         if (!isValid) return;
 
         try {
+            console.log(name)
             const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -71,6 +72,8 @@ const Register = () => {
             const result = await response.json();
 
             if (!response.ok) {
+                setErrorName(result.errors?.name || "");
+                setErrorSurname(result.errors?.surname || "");
                 setErrorUsername(result.errors?.username || "");
                 setErrorEmail(result.errors?.email || "");
                 return;
@@ -104,122 +107,106 @@ const Register = () => {
                             <h1 className="has-text-white">Cocktail King</h1>
                         </header>
 
-                        <div className="">
-                            <div className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    placeholder="Imie"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    required
-                                />
-                                <span className="icon is-small is-left has-text-warning">
-                                    <FontAwesomeIcon icon={faUser} />
-                                </span>
-                            </div>
+                      
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Imie"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faUser} />
+                            </span>
                         </div>
-
+                      
                         <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorName ? "visible" : "hidden" }}>
                             {errorName}
                         </p>
 
-                        <div className="">
-                            <div className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    placeholder="Nazwisko"
-                                    value={surname}
-                                    onChange={(e) => setSurname(e.target.value)}
-                                    required
-                                />
-                                <span className="icon is-small is-left has-text-warning">
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Nazwisko"
+                                value={surname}
+                                onChange={(e) => setSurname(e.target.value)}
+                            />
+                            <span className="icon is-small is-left has-text-warning">
                                     <FontAwesomeIcon icon={faUser} />
-                                </span>
-                            </div>
+                            </span>
                         </div>
-
+                      
                         <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorSurname ? "visible" : "hidden" }}>
                             {errorSurname}
                         </p>
 
-                        <div className="">
-                            <div className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    placeholder="Nazwa użytkownika"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    required
-                                />
-                                <span className="icon is-small is-left has-text-warning">
-                                    <FontAwesomeIcon icon={faUser} />
-                                </span>
-                            </div>
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Nazwa użytkownika"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faUser} />
+                            </span>
                         </div>
+                        
 
                         <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorUsername ? "visible" : "hidden" }}>
                             {errorUsername}
                         </p>
 
-                        <div className="">
-                            <div className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="email"
-                                    placeholder="Adres email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                />
-                                <span className="icon is-small is-left has-text-warning">
-                                    <FontAwesomeIcon icon={faEnvelope} />
-                                </span>
-                            </div>
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="email"
+                                placeholder="Adres email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </span>
                         </div>
-
+                      
                         <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorEmail ? "visible" : "hidden" }}>
                             {errorEmail}
                         </p>
 
-                        <div className="">
-                            <div className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="password"
-                                    placeholder="Hasło"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                                <span className="icon is-small is-left has-text-warning">
-                                    <FontAwesomeIcon icon={faLock} />
-                                </span>
-                            </div>
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="Hasło"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faLock} />
+                            </span>
                         </div>
-                    
+                        
                         <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorPassword ? "visible" : "hidden" }}>
                             {errorPassword}
                         </p>
 
-                        <div className="">
-                            <div className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="password"
-                                    placeholder="Ponów hasło"
-                                    value={confirmedPassword}
-                                    onChange={(e) => setConfirmedPassword(e.target.value)}
-                                    required
-                                />
-                                <span className="icon is-small is-left has-text-warning">
-                                    <FontAwesomeIcon icon={faLock} />
-                                </span>
-                            </div>
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="Ponów hasło"
+                                value={confirmedPassword}
+                                onChange={(e) => setConfirmedPassword(e.target.value)}
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faLock} />
+                            </span>
                         </div>
-
+                       
                         <p className="has-text-danger error mt-1 mb-1" style={{ visibility: errorConfirmedPassword ? "visible" : "hidden" }}>
                             {errorConfirmedPassword}
                         </p>

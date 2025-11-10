@@ -31,11 +31,25 @@ class RegisterController extends AbstractController
 
         $errors = [];
 
-        if ($userRepository->findOneBy(['email' => $email])) {
+        if ($name === null || trim($name) === '') {
+            $errors['name'] = 'To pole nie może być puste';
+        }
+
+        if ($surname === null || trim($surname) === '') {
+            $errors['surname'] = 'To pole nie może być puste';
+        }
+
+        if ($email === null || trim($email) === '') {
+            $errors['email'] = 'To pole nie może być puste';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Podaj poprawny adres email';
+        } elseif ($userRepository->findOneBy(['email' => $email])) {
             $errors['email'] = 'Podany adres email już istnieje';
         }
 
-        if ($userRepository->findOneBy(['username' => $username])) {
+        if ($username === null || trim($username) === '') {
+            $errors['username'] = 'To pole nie może być puste';
+        } else if ($userRepository->findOneBy(['username' => $username])) {
             $errors['username'] = 'Podana nazwa użytkownika  już istnieje';
         }
 

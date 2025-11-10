@@ -31,7 +31,7 @@ class LoginController extends AbstractController
         $password = $data['password'] ?? null;
 
         if (!$email || !$password) {
-            return new JsonResponse(['message' => 'No login data'], 400);
+            return new JsonResponse(['message' => 'Nie prawidłowy login lub hasło'], 400);
         }
 
         $user = $this->userRepository->findOneBy(['email' => $email]);

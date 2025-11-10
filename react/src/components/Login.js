@@ -78,22 +78,20 @@ const Login = () => {
                             <h1 className="has-text-white">Cocktail King</h1>
                         </header>
 
-                        <div className="">
-                            <div className="control has-icons-left">
+                        <div className="control has-icons-left">
                                 <input
                                     className="input"
                                     type="email"
                                     placeholder="Adres email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    required
+                             
                                 />
                                 <span className="icon is-small is-left has-text-warning">
                                     <FontAwesomeIcon icon={faEnvelope} />
                                 </span>
                             </div>
-                        </div>
-
+                    
                         <div className="mt-5">
                             <div className="control has-icons-left">
                                 <input
@@ -102,7 +100,7 @@ const Login = () => {
                                     placeholder="Hasło"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    required
+                                   
                                 />
                                 <span className="icon is-small is-left has-text-warning">
                                     <FontAwesomeIcon icon={faLock} />

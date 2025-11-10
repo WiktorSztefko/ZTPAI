@@ -1,8 +1,9 @@
-export const validateForm = ({ name, surname, username, password, confirmedPassword }) => {
+export const validateForm = ({ name, surname, username, email, password, confirmedPassword }) => {
     const errors = {
         name : "",
         surname: "",
         username: "",
+        email: "",
         password: "",
         confirmPassword: "",
     };
@@ -17,6 +18,10 @@ export const validateForm = ({ name, surname, username, password, confirmedPassw
 
     if (!username || username.trim().length < 3) {
         errors.username = "Nazwa użytkownika musi mieć co najmniej 3 znaki";
+    }
+
+    if (!email || email.trim().length < 1) {
+        errors.email = "To pole nie może być puste";
     }
 
     if (!password || password.length < 8) {
