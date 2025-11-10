@@ -1,0 +1,126 @@
+.panel-cocktail {
+    min-height: calc(100vh - 14vh - 5vh - 2em - 12px);
+}
+
+.panel-cocktail-inner {
+    display: flex;
+    flex: 1; 
+    width: 100%;
+}
+
+.column-main,
+.column-recipe {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.column-main {
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.column-recipe h1 {
+    color: var(--primary-color);
+    font-size: 1.5vw;
+}
+
+.column-recipe p, .column-main p {
+    font-size: 1vw;
+}
+
+.column-recipe ul {
+    list-style-type: disc;
+    font-size: 1vw;
+    padding-left: 1.5rem;
+}
+
+.card {
+    background: black;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 1rem 1rem 0rem 1rem;
+    max-width: 375px;
+}
+
+.card:hover .image-wrapper img {
+    transform: scale(1.1);
+}
+
+.card:hover {
+    box-shadow: 0 6px 15px var(--tertiary-color);
+    cursor: pointer;
+}
+
+.cocktail-caption {
+    border-top: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 1.5vw;
+    margin-top: 0.5em;
+    padding: 0.5rem;
+}
+
+.image-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.border-line {
+    border-left: 1px solid var(--tertiary-color)
+}
+
+@media screen and (max-width: 768px) {
+
+    .panel-cocktail-inner {
+        flex-direction: column;
+    }
+
+    .center-image-mobie{
+        display: flex;
+        justify-content: center;
+        padding-top: 2em 
+    }
+
+    .card:hover {
+        box-shadow: none
+    }
+        
+    .card:hover .image-wrapper img {
+        transform: none;
+    }
+
+    .column-recipe h1 {
+        font-size: 2em;
+    }
+
+    .column-recipe ul {
+        flex-direction: column;
+    }
+
+    .cocktail-caption {          
+        font-size: 1em;
+    }
+
+    .column-recipe p, .column-main p {
+        font-size: 1em;
+    }
+                                        
+    .column-recipe ul {
+        font-size: 1em;
+        width:100%
+    }
+
+    .border-line {
+        border-left: none
+    }
+}

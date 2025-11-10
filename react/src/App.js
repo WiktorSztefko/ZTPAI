@@ -7,6 +7,7 @@ import Account from "./components/Account";
 import NotFound from "./components/NotFound";
 import GalleryAlcohols from './components/GalleryAlcohols';
 import GalleryCocktails from './components/GalleryCocktails';
+import Cocktail from './components/Cocktail';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/account" element={<Account />} />
         <Route path="/alcohols" element={<GalleryAlcohols/>} />
         <Route path="/cocktails" element={<GalleryCocktails />} />
-        {/* <Route path="/cocktails/:slug" element={<CocktailDetail />} /> */}
+        <Route path="/cocktails/:slug" element={<Cocktail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
