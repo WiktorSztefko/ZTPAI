@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import { fetchUser } from "../api/fetchUser";
 
@@ -14,6 +15,7 @@ const GalleryAlcohols = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [alcohols, setAlcohols] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
@@ -32,12 +34,21 @@ const GalleryAlcohols = () => {
         };
 
         const fetchAlcohols = async () => {
-            const response = await fetch("http://localhost:8000/api/alcohols");
+            try {
+                setLoading(true);
+                const response = await fetch("http://localhost:8000/api/alcohols");
 
                 if (response.ok) {
                     const data = await response.json();
-                    setAlcohols(data);
+
+                    if (data) {
+                        setAlcohols(data);
+                    }
+                    setLoading(false);
                 }
+            } catch (error) {
+                setLoading(false);
+            }
         };
 
         getUser();
@@ -45,6 +56,26 @@ const GalleryAlcohols = () => {
     }, [navigate]);
 
     if (!user) return <p></p>;
+
+    if (loading) {
+        return (
+            <>
+                <Header />
+                <div className="columns is-gapless">
+                    <div className="column is-2">
+                        <Navigation />
+                    </div>
+                    <main id="gallery" className="column has-text-centered">
+                        <div className="has-text-centered mt-6">
+                            <ClipLoader size={80} color="#005028" />
+                            <p>Ładowanie Alkoholi ...</p>
+                        </div>
+                    </main>
+                </div>
+                <Footer />
+            </>
+        );
+    }
 
     return (
         <>

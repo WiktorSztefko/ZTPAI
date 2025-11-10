@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import { fetchUser } from "../api/fetchUser";
 
@@ -14,9 +15,9 @@ const GalleryCocktails = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [cocktails, setCocktails] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-
         const getUser = async () => {
             const result = await fetchUser();
 
@@ -32,15 +33,24 @@ const GalleryCocktails = () => {
         };
 
         const fetchCocktails = async () => {
-            const response = await fetch("http://localhost:8000/api/cocktails");
+            try {
+                setLoading(true);
+                const response = await fetch("http://localhost:8000/api/cocktails");
 
-            if (response.ok) {
-                const data = await response.json();
-                setCocktails(data);
+                if (response.ok) {
+                    const data = await response.json();
+
+                    if(data) {
+                        setCocktails(data);
+                    }
+                    setLoading(false);
+                }
+            } catch (error) {
+                setLoading(false);
             }
         };
-        getUser();
 
+        getUser();
     }, [navigate]);
 
     const slugify = (text) => {
@@ -54,8 +64,27 @@ const GalleryCocktails = () => {
             .replace(/^-+|-+$/g, "");     // usuwa myślniki z początku i końca
     };
 
-
     if (!user) return <p></p>;
+
+    if (loading) {
+        return (
+            <>
+                <Header />
+                <div className="columns is-gapless">
+                    <div className="column is-2">
+                        <Navigation />
+                    </div>
+                    <main id="gallery" className="column has-text-centered">
+                        <div className="has-text-centered mt-6">
+                            <ClipLoader size={80} color="#005028" />
+                            <p>Ładowanie koktajli ...</p>
+                        </div>
+                    </main>
+                </div>
+                <Footer />
+            </>
+        );
+    }
 
     return (
         <>
@@ -66,12 +95,13 @@ const GalleryCocktails = () => {
                 </div>
 
                 <main id="gallery" className="column">
-
                     <div className="columns is-multiline is-centered">
                         {cocktails.map((cocktail) => (
                             <div key={cocktail.id_cocktail} className="column is-one-quarter m-3">
-
-                                <figure className="card flex-column has-text-centered" onClick={() => navigate(`/cocktails/${slugify(cocktail.name)}`)}>
+                                <figure
+                                    className="card flex-column has-text-centered"
+                                    onClick={() => navigate(`/cocktails/${slugify(cocktail.name)}`)}
+                                >
                                     <div className="image-wrapper">
                                         <img
                                             src={`/images/cocktails/${cocktail.image}`}
@@ -83,11 +113,9 @@ const GalleryCocktails = () => {
                                         {cocktail.name}
                                     </figcaption>
                                 </figure>
-
                             </div>
                         ))}
                     </div>
-
                 </main>
             </div>
             <Footer />
