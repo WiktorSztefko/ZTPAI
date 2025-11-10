@@ -1,7 +1,11 @@
 #gallery{
-    margin: 0 2em 1em 0;
+    margin: 0 2em 0 0;
     min-height: calc(100vh - 14vh - 5vh - 2em - 12px);
-}
+/*  14vh - header
+    5vh - footer
+    2em - margin footer
+    12px - padding header */
+} 
 
 .card {
     background: black;
