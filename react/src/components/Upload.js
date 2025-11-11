@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchUser } from "../api/fetchUser";
+import { validateForm } from "../utils/validateUpload"; // ścieżka do pliku
 import { API_URL } from "../api/url";
 
 import "bulma/css/bulma.min.css";
@@ -56,7 +57,19 @@ const Upload= () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!validateForm()) return;
+        const { isValid, newErrors } = validateForm({
+            name,
+            description,
+            preparationInstruction,
+            funFact,
+            difficulty,
+            file,
+            selectedIngredients
+        });
+
+        setErrors(newErrors);
+
+        if (!isValid) return;
 
         const formData = new FormData();
         formData.append("name", name);
@@ -67,63 +80,36 @@ const Upload= () => {
         formData.append("file", file);
 
         selectedIngredients.forEach((ing, idx) => {
-            formData.append(`ingredients[${idx}][name]`, ing.name);
+            formData.append(`ingredients[${idx}][id_ingredient]`, ing.id_ingredient);
             formData.append(`ingredients[${idx}][quantity]`, ing.quantity);
-            formData.append(`ingredients[${idx}][unit]`, ing.unit);
+            formData.append(`ingredients[${idx}][id_unit]`, ing.id_unit);
         });
 
-        // const response = await fetch(`${API_URL}/api/cocktails`, {
-        //     method: "POST",
-        //     body: formData,
-        //     credentials: "include",
-        // });
+        try {
+            const response = await fetch(`${API_URL}/api/upload/cocktail`, {
+                method: "POST",
+                body: formData,
+                credentials: "include",
+            });
 
-        // if (response.ok) {
-        //     // np. przekierowanie do listy koktajli
-        // } else {
-        //     // obsługa błędów
-        // }
-    };
+            if (response.status === 409) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    name: "Koktajl o tej nazwie już istnieje"
+                }));
+                return;
+            }
 
-    const validateForm = () => {
-        const newErrors = {
-            name: name.trim() ? "" : "Podaj nazwę koktajlu",
-            description: description.trim() ? "" : "Podaj opis",
-            preparationInstruction: preparationInstruction.trim() ? "" : "Podaj instrukcję przygotowania",
-            difficultyLevel: difficulty ? "" : "Wybierz poziom trudności",
-            ingredients: [],
-            ingredientsGlobal: "",
-            file: file ? "" : "Wybierz plik z obrazkiem",
-        };
+            const data = await response.json();
+            if (!response.ok) {
+                console.log(data.error || "Wystąpił błąd podczas dodawania koktajlu");
+                return;
+            }
 
-        if (selectedIngredients.length === 0) {
-            newErrors.ingredientsGlobal = "Dodaj conajmniej 1 składnik";
+            navigate("/cocktails");
+        } catch (err) {
+            console.error(err);
         }
-     
-        selectedIngredients.forEach((ing, idx) => {
-            console.log(ing)
-            const ingErrors = {
-                name: ing.id_ingredient ? "" : "Wybierz składnik",
-                quantity: ing.quantity ? "" : "Wybierz ilość",
-                unit: ing.id_unit ? "" : "Wybierz jednostkę",
-            };
-            newErrors.ingredients[idx] = ingErrors;
-        });
-
-        setErrors(newErrors);
-
-        // Jeśli wszystkie wartości w newErrors są puste → formularz jest poprawny
-        const isValid =
-            !newErrors.name &&
-            !newErrors.description &&
-            !newErrors.preparationInstruction &&
-            !newErrors.funFact &&
-            !newErrors.difficultyLevel &&
-            !newErrors.file &&
-            !newErrors.ingredientsGlobal &&
-            newErrors.ingredients.every((ingErr) => Object.keys(ingErr).length === 0);
-
-        return isValid;
     };
 
     useEffect(() => {
