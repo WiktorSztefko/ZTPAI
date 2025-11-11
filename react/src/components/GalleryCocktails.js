@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 
 import { fetchUser } from "../api/fetchUser";
+import { API_URL } from "../api/url";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +21,9 @@ const GalleryCocktails = () => {
     const [user, setUser] = useState(null);
     const [cocktails, setCocktails] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [isSearching, setIsSearching] = useState(false);
 
     useEffect(() => {
         const getUser = async () => {
@@ -56,6 +60,36 @@ const GalleryCocktails = () => {
 
         getUser();
     }, [navigate]);
+
+    const fetchCocktailsByKey = async (search) => {
+        console.log("szukam")
+        try {
+            setIsSearching(true);
+            setLoading(true);
+
+            const url = search.trim() === ""
+                ? `${API_URL}/api/cocktails`                    
+                : `${API_URL}/api/cocktails/search?key=${encodeURIComponent(search)}`;
+
+            const response = await fetch(url, { credentials: "include" });
+
+            if (!response.ok) {
+                setCocktails([]);
+                setLoading(false);
+                setIsSearching(false);
+                return;
+            }
+
+            const data = await response.json();
+            setCocktails(data || []);
+            setLoading(false);
+            setIsSearching(false);
+        } catch (err) {
+            setCocktails([]);
+            setLoading(false);
+            setIsSearching(false);
+        }
+    };
 
     const slugify = (text) => {
         return text
@@ -106,6 +140,13 @@ const GalleryCocktails = () => {
                                 className="input"
                                 type="text"
                                 placeholder="Wyszukaj"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        fetchCocktailsByKey(searchTerm);
+                                    }
+                                }}
 
                             />
                             <span className="icon is-small is-left has-text-warning">

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CocktailRepository;
 
 class CocktailController extends AbstractController
@@ -37,6 +38,32 @@ class CocktailController extends AbstractController
             $data,
             200
         );
+    }
+
+    #[Route('/api/cocktails/search', name: 'api_cocktails_search', methods: ['GET'])]
+    public function search(Request $request, SessionInterface $session, CocktailRepository $cocktailRepository): JsonResponse
+    {
+        $userId = $session->get('user_id');
+
+        if (!$userId) {
+            return new JsonResponse(['message' => 'User not logged in'], 401);
+        }
+
+        $search = $request->query->get('key');
+
+        if (!$search || trim($search) === '') {
+            return new JsonResponse([], 200);
+        }
+
+        $cocktails = $cocktailRepository->findBySearch($search);
+
+        $data = array_map(fn($cocktail) => [
+            'id_cocktail' => $cocktail->getId(),
+            'name' => $cocktail->getName(),
+            'image' => $cocktail->getImage(),
+        ], $cocktails);
+
+        return new JsonResponse($data, 200);
     }
 
     #[Route('/api/cocktails/{slug}', name: 'api_cocktail_detail', methods: ['GET'])]
