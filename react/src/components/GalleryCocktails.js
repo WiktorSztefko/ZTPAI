@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+
 import { fetchUser } from "../api/fetchUser";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import "bulma/css/bulma.min.css";
 import "../styles/App.css";
@@ -95,6 +99,21 @@ const GalleryCocktails = () => {
                 </div>
 
                 <main id="gallery" className="column">
+                    <div className="search-container is-flex is-justify-content-center is-align-items-center">
+
+                        <div className="control has-icons-left">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Wyszukaj"
+
+                            />
+                            <span className="icon is-small is-left has-text-warning">
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </span>
+                        </div>
+
+                    </div>
                     <div className="columns is-multiline is-centered">
                         {cocktails.map((cocktail) => (
                             <div key={cocktail.id_cocktail} className="column is-one-quarter m-3">

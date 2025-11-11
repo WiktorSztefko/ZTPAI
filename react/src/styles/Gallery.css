@@ -45,7 +45,20 @@
     transition: transform 0.3s ease;
 }
 
+.search-container{
+    margin-bottom: 2em;
+    margin-top: 0.5em
+}
+
+.search-container div {
+    width: 80%;
+}
+
 @media screen and (max-width: 768px) {
+
+    #gallery {
+        margin-right: 0
+    }
 
     #gallery .columns {
         justify-content: center;
@@ -71,5 +84,10 @@
 
     .alcohol-caption {
         font-size: 1rem;
+    }
+
+    .search-container {
+        margin-top: 2em;
+        width: 100%;
     }
 }
