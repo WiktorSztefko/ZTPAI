@@ -53,21 +53,7 @@ const Dashboard = () => {
                             <MiddleSlider />
                         </div>
 
-                    <aside className="column is-2 has-text-centered mt-3-mobile">
-
-                        <div>
-                            <h2>
-                                <span>Mistrz</span>
-                                <span>Barmańskiej</span>
-                                <span>Sztuki</span>
-                            </h2>
-
-                            <button id="button-task" class="button mt-2 has-text-white hover-effect">
-                                Wylosuj Zadanie
-                            </button>
-                        </div>
-
-                    </aside>
+                    <aside className="column is-2 has-text-centered mt-3-mobile"></aside>
                 </div>
             </section>
             <TilesSection />
