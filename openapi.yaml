@@ -155,6 +155,74 @@ paths:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
 
+  /api/cocktails/search:
+    get:
+      summary: Wyszukiwanie koktajli
+      description: Wyszukuje koktajle według podanego słowa kluczowego.
+      parameters:
+        - name: key
+          in: query
+          required: false
+          description: Słowo kluczowe do wyszukiwania koktajli
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista pasujących koktajli lub pusta lista jeśli brak wyników
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CocktailListItem'
+        '401':
+          description: Użytkownik niezalogowany
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+
+  /api/reference/ingredients:
+    get:
+      summary: Pobieranie listy składników
+      description: Zwraca pełną listę dostępnych składników z bazy danych.
+      responses:
+        '200':
+          description: Lista składników
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IngredientItem'
+        '401':
+          description: Użytkownik niezalogowany
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      
+  /api/reference/units:
+    get:
+      summary: Pobieranie listy jednostek miary
+      description: Zwraca pełną listę jednostek miary wykorzystywanych w przepisach.
+      responses:
+        '200':
+          description: Lista jednostek miary
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnitItem'
+        '401':
+          description: Użytkownik niezalogowany
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+
+
 components:
   schemas:
     LoginRequest:
@@ -283,8 +351,28 @@ components:
           example: Burbon
         quantity:
           type: integer
-          example: 60
+          example: 30
         unit:
+          type: string
+          example: ml
+
+    IngredientItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Burbon
+
+    UnitItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
           type: string
           example: ml
 
