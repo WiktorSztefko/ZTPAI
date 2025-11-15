@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchUser } from "../api/fetchUser";
-import { validateForm } from "../utils/validateUpload"; // ścieżka do pliku
+import { validateForm } from "../utils/validateUpload";
 import { API_URL } from "../api/url";
 
 import "bulma/css/bulma.min.css";
@@ -37,6 +37,7 @@ const Upload= () => {
         preparationInstruction: "",
         difficultyLevel: "",
         ingredients: [], // tablica błędów dla każdego składnika
+        ingredientsGlobal: "" , // globalny błąd - nie dodano składnika
         file: "",
     });
 

@@ -6,7 +6,6 @@ import "bulma/css/bulma.min.css";
 import "../styles/App.css";
 import "../styles/Dashboard.css";
 
-
 import Header from "./Header";
 import Navigation from "./Navigation";
 import MiddleSlider from "./MiddleSlider";

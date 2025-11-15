@@ -6,14 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 
-
 import { fetchUser } from "../api/fetchUser";
 import { API_URL } from "../api/url";
 
 import "bulma/css/bulma.min.css";
 import "../styles/App.css";
 import "../styles/Cocktail.css";
-
 
 import Header from "./Header";
 import Navigation from "./Navigation";
@@ -37,7 +35,6 @@ const Cocktail = () => {
             if (response.ok) {
                 const data = await response.json();
                 setCocktail(data);
-                console.log(data, slug)
             }
         };
 
@@ -123,7 +120,7 @@ const Cocktail = () => {
                                 <ul>
                                     {cocktail.preparation_instruction
                                         .split(". ")
-                                        .filter(sentence => sentence.trim() !== "") // usuwa puste zdania
+                                        .filter(sentence => sentence.trim() !== "") // usuwa puste zdanie, znaczenie na końcu całej instrukcji, dodawało zbędną kropkę
                                         .map((sentence, index) => (
                                             <li key={index} className="has-text-white">
                                                 {sentence}
@@ -140,7 +137,6 @@ const Cocktail = () => {
                         </div>
                     </div>
 
-                  
                 </main>
 
             </div>

@@ -62,7 +62,7 @@ class UploadController extends AbstractController
                 ], 500);
             }
         } else {
-            return new JsonResponse(['error' => 'Brak pliku zdjęcia'], 400);
+            return new JsonResponse(['message' => 'Brak pliku zdjęcia'], 400);
         }
 
         $em->getConnection()->beginTransaction();

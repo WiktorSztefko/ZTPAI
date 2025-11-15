@@ -22,9 +22,6 @@ const GalleryCocktails = () => {
     const [cocktails, setCocktails] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const [searchTerm, setSearchTerm] = useState("");
-    const [isSearching, setIsSearching] = useState(false);
-
     useEffect(() => {
         const getUser = async () => {
             const result = await fetchUser();
@@ -62,9 +59,7 @@ const GalleryCocktails = () => {
     }, [navigate]);
 
     const fetchCocktailsByKey = async (search) => {
-        console.log("szukam")
         try {
-            setIsSearching(true);
             setLoading(true);
 
             const url = search.trim() === ""
@@ -76,18 +71,16 @@ const GalleryCocktails = () => {
             if (!response.ok) {
                 setCocktails([]);
                 setLoading(false);
-                setIsSearching(false);
                 return;
             }
 
             const data = await response.json();
             setCocktails(data || []);
             setLoading(false);
-            setIsSearching(false);
+           
         } catch (err) {
             setCocktails([]);
             setLoading(false);
-            setIsSearching(false);
         }
     };
 
@@ -141,7 +134,6 @@ const GalleryCocktails = () => {
                                 type="text"
                                 placeholder="Wyszukaj"
                                 value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         fetchCocktailsByKey(searchTerm);

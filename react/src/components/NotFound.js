@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { fetchUser } from "../api/fetchUser";
+import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWineGlass, faWhiskeyGlass, faMartiniGlassCitrus } from '@fortawesome/free-solid-svg-icons';

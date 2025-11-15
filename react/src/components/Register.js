@@ -62,7 +62,6 @@ const Register = () => {
         if (!isValid) return;
 
         try {
-            console.log(name)
             const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

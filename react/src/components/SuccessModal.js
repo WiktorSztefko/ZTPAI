@@ -38,7 +38,7 @@ const SuccessModal= () => {
                     <svg className="progress-ring" width="100" height="100">
                         <circle
                             className="progress-ring__circle"
-                            stroke="#CAA12B"
+                            stroke="#D4AF37"
                             strokeWidth="8"
                             fill="transparent"
                             r="45"
