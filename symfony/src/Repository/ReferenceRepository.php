@@ -18,11 +18,11 @@ class ReferenceRepository extends ServiceEntityRepository
     {
         $ingredients = $this->getEntityManager()
             ->getRepository(Ingredient::class)
-            ->findAll();
+            ->findBy([], ['name_ingredient' => 'ASC']); // sortowanie alfabetyczne
 
         return array_map(fn(Ingredient $ingredient) => [
             'id_ingredient' => $ingredient->getId(),
-            'name' => $ingredient->getName(),
+            'name_ingredient' => $ingredient->getName(),
         ], $ingredients);
     }
 
@@ -34,7 +34,7 @@ class ReferenceRepository extends ServiceEntityRepository
 
         return array_map(fn(CocktailUnit $unit) => [
             'id_unit' => $unit->getId(),
-            'name' => $unit->getName(),
+            'name_unit' => $unit->getName(),
         ], $units);
     }
 }

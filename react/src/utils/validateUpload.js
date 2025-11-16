@@ -30,6 +30,12 @@ export const validateForm = ({
         newErrors.ingredients[idx] = ingErrors;
     });
 
+    const ids = selectedIngredients.map(ing => ing.id_ingredient).filter(Boolean);
+    const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+    if (duplicates.length > 0) {
+        newErrors.ingredientsGlobal = "Zduplikowano składniki";
+    }
+
     const isEmpty = (obj) => Object.values(obj).every(v => v === "" || v == null);
     const isValid =
         !newErrors.name &&

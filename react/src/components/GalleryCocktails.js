@@ -21,6 +21,7 @@ const GalleryCocktails = () => {
     const [user, setUser] = useState(null);
     const [cocktails, setCocktails] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         const getUser = async () => {
@@ -134,6 +135,7 @@ const GalleryCocktails = () => {
                                 type="text"
                                 placeholder="Wyszukaj"
                                 value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         fetchCocktailsByKey(searchTerm);

@@ -29,7 +29,8 @@ class UploadController extends AbstractController
         $difficultyLevel = (int) $request->request->get('difficultyLevel', 0);
         $file = $request->files->get('file');
 
-        $ingredients = $request->request->all('ingredients');
+        $ingredients = json_decode($request->request->get('ingredients', '[]'), true);
+
 
         if (!$name || !$description || !$instruction || !$difficultyLevel) {
             return new JsonResponse(['message' => 'Wszystkie wymagane pola muszą być uzupełnione'], 400);
@@ -72,7 +73,7 @@ class UploadController extends AbstractController
 
             $sql = "INSERT INTO cocktails 
                     (name, description, preparation_instruction, fun_fact, difficulty_level, image, id_assigned_by) 
-                    VALUES (:name, :description, :instruction, :fun_fact, :difficulty_level, :image, :id_assigned_by))";
+                    VALUES (:name, :description, :instruction, :fun_fact, :difficulty_level, :image, :id_assigned_by)";
 
             $stmt = $connection->prepare($sql);
             $stmt->bindValue('name', $name);
@@ -81,7 +82,7 @@ class UploadController extends AbstractController
             $stmt->bindValue('fun_fact', $funFact);
             $stmt->bindValue('difficulty_level', $difficultyLevel);
             $stmt->bindValue('image', $fileName);
-            $stmt->bindValue('id_assigned_by)', $userId);
+            $stmt->bindValue('id_assigned_by', $userId);
 
             $stmt->executeStatement();
             $id = $connection->lastInsertId();
@@ -117,3 +118,5 @@ class UploadController extends AbstractController
         }
     }
 }
+
+

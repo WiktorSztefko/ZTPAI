@@ -36,15 +36,6 @@ services:
     volumes:
       - ./postgres:/var/lib/postgresql/18/docker
 
-  react:
-    build:
-      context: .  
-      dockerfile: docker/react/Dockerfile
-    container_name: react
-    ports:
-    - "3000:80"
-    networks:
-    - app-network
   nginx:
     build:
       context: .

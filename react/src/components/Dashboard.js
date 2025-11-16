@@ -41,7 +41,7 @@ const Dashboard = () => {
     return (
         <>
             <Header />
-            <section className="mt-5 top-section">
+            <section className="top-section">
                 <div className="columns is-gapless">
 
                         <div className="column is-2">

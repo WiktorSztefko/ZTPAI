@@ -80,11 +80,7 @@ const Upload= () => {
         formData.append("difficultyLevel", difficulty);
         formData.append("file", file);
 
-        selectedIngredients.forEach((ing, idx) => {
-            formData.append(`ingredients[${idx}][id_ingredient]`, ing.id_ingredient);
-            formData.append(`ingredients[${idx}][quantity]`, ing.quantity);
-            formData.append(`ingredients[${idx}][id_unit]`, ing.id_unit);
-        });
+        formData.append("ingredients", JSON.stringify(selectedIngredients));
 
         try {
             const response = await fetch(`${API_URL}/api/upload/cocktail`, {
@@ -104,6 +100,7 @@ const Upload= () => {
             const data = await response.json();
             if (!response.ok) {
                 console.log(data.error || "Wystąpił błąd podczas dodawania koktajlu");
+                alert(data.error)
                 return;
             }
 
@@ -252,7 +249,7 @@ const Upload= () => {
                                         >
                                             <option value="" disabled hidden>Wybierz składnik</option>
                                             {ingredientsList.map(i => (
-                                                <option key={i.id_ingredient} value={i.id_ingredient}>{i.name}</option>
+                                                <option key={i.id_ingredient} value={i.id_ingredient}>{i.name_ingredient}</option>
                                             ))}
                                         </select>
 
@@ -281,7 +278,7 @@ const Upload= () => {
                                         >
                                             <option value="" disabled hidden>Wybierz jednostkę</option>
                                             {unitsList.map(u => (
-                                                <option key={u.id_unit} value={u.id_unit}>{u.name}</option>
+                                                <option key={u.id_unit} value={u.id_unit}>{u.name_unit}</option>
                                             ))}
                                         </select>
 

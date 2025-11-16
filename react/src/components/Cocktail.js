@@ -17,7 +17,6 @@ import Header from "./Header";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 
-
 const Cocktail = () => {
     const [user, setUser] = useState(null);
     const { slug } = useParams();
@@ -56,7 +55,7 @@ const Cocktail = () => {
  
     }, [navigate, slug]);
 
-    if (!user || !cocktail) return <p></p>;
+    if (!user) return <p></p>;
 
     return (
         <>
@@ -66,77 +65,77 @@ const Cocktail = () => {
                     <Navigation />
                 </div>
                 <main className="column panel-cocktail">
-                   
-                    <div className="columns is-gapless panel-cocktail-inner">
-                        <div className="column is-three-quarters column-main">
+                    {cocktail && (
+                        <div className="columns is-gapless panel-cocktail-inner">
+                            <div className="column is-three-quarters column-main">
 
-                            <div className="center-image-mobie">
-                                <figure className="card has-text-centered">
-                                    <div className="image-wrapper">
-                                        <img
-                                            src={`/images/cocktails/${cocktail.image}`}
-                                            alt={cocktail.name}
-                                            className="item-image"
+                                <div className="center-image-mobie">
+                                    <figure className="card has-text-centered">
+                                        <div className="image-wrapper">
+                                            <img
+                                                src={`/images/cocktails/${cocktail.image}`}
+                                                alt={cocktail.name}
+                                                className="item-image"
+                                            />
+                                        </div>
+                                        <figcaption className="cocktail-caption">
+                                            {cocktail.name}
+                                        </figcaption>
+                                    </figure>
+                                </div>
+
+                                <div className="cocktail-difficulty">
+                                    {Array.from({ length: 5 }).map((_, index) => (
+                                        <FontAwesomeIcon
+                                            key={index}
+                                            icon={index < cocktail.difficulty_level ? faStarSolid : faStarRegular}
+                                            style={{ color: index < cocktail.difficulty_level ? "#D4AF37" : "#800020", marginRight: "4px" }}
                                         />
-                                    </div>
-                                    <figcaption className="cocktail-caption">
-                                        {cocktail.name}
-                                    </figcaption>
-                                </figure>
-                            </div>
-
-                            <div className="cocktail-difficulty">
-                                {Array.from({ length: 5 }).map((_, index) => (
-                                    <FontAwesomeIcon
-                                        key={index}
-                                        icon={index < cocktail.difficulty_level ? faStarSolid : faStarRegular}
-                                        style={{ color: index < cocktail.difficulty_level ? "#D4AF37" : "#800020", marginRight: "4px" }}
-                                    />
-                                ))}
-                            </div>
-
-
-                            <div className="has-text-centered has-text-white pr-2 pl-2">
-                                <p>{cocktail.description}</p>
-                            </div>
-
-                        </div>
-
-                   
-                        <div className="column is-one-quarter column-recipe">
-                            <div className="pl-2 pr-2 border-line">
-                                <h1>Składniki</h1>
-                                <ul>
-                                    {cocktail.ingredients.map((ingredient, index) => (
-                                        <li key={index} className="has-text-white">
-                                            {ingredient.name} - {ingredient.quantity} {ingredient.unit}
-                                        </li>
                                     ))}
-                                </ul>
+                                </div>
+
+
+                                <div className="has-text-centered has-text-white pr-2 pl-2">
+                                    <p>{cocktail.description}</p>
+                                </div>
+
                             </div>
 
-                            <div className="pl-2 pr-2 mt-2 border-line">
-                                <h1>Instrukcja przygotowania</h1>
-                                <ul>
-                                    {cocktail.preparation_instruction
-                                        .split(". ")
-                                        .filter(sentence => sentence.trim() !== "") // usuwa puste zdanie, znaczenie na końcu całej instrukcji, dodawało zbędną kropkę
-                                        .map((sentence, index) => (
+                    
+                            <div className="column is-one-quarter column-recipe">
+                                <div className="pl-2 pr-2 border-line">
+                                    <h1>Składniki</h1>
+                                    <ul>
+                                        {cocktail.ingredients.map((ingredient, index) => (
                                             <li key={index} className="has-text-white">
-                                                {sentence}
+                                                {ingredient.name} - {ingredient.quantity} {ingredient.unit}
                                             </li>
                                         ))}
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
 
-                            <div className="pl-2 pr-2 mt-2 border-line">
-                                <h1>Ciekawostka</h1>
-                                <p className="has-text-white">{cocktail.fun_fact}</p>
-                            </div>
+                                <div className="pl-2 pr-2 mt-2 border-line">
+                                    <h1>Instrukcja przygotowania</h1>
+                                    <ul>
+                                        {cocktail.preparation_instruction
+                                            .split(". ")
+                                            .filter(sentence => sentence.trim() !== "") // usuwa puste zdanie, znaczenie na końcu całej instrukcji, dodawało zbędną kropkę
+                                            .map((sentence, index) => (
+                                                <li key={index} className="has-text-white">
+                                                    {sentence}
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </div>
 
+                                <div className="pl-2 pr-2 mt-2 border-line">
+                                    <h1>Ciekawostka</h1>
+                                    <p className="has-text-white">{cocktail.fun_fact}</p>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-
+                    )}
                 </main>
 
             </div>

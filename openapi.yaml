@@ -359,20 +359,20 @@ components:
     IngredientItem:
       type: object
       properties:
-        id:
+        id_ingredient:
           type: integer
           example: 1
-        name:
+        name_ingredient:
           type: string
           example: Burbon
 
     UnitItem:
       type: object
       properties:
-        id:
+        id_unit:
           type: integer
           example: 1
-        name:
+        name_unit:
           type: string
           example: ml
 
